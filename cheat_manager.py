@@ -37,6 +37,8 @@ app = typer.Typer()
 
 def add_cheat_code(title: str, cheat_code: str, tip: str):
     """Function to add a new cheat code and tip to the database"""
+    global conn
+    global cursor
     conn = sqlite3.connect('cheat_database.db')
     cursor = conn.cursor()
 
@@ -50,6 +52,8 @@ def add_cheat_code(title: str, cheat_code: str, tip: str):
 
 def search_cheats(title: str):
     """Function to search for cheat codes and tips based on the game title"""
+    global conn
+    global cursor
     conn = sqlite3.connect('cheat_database.db')
     cursor = conn.cursor()
 
@@ -69,9 +73,10 @@ def search_cheats(title: str):
 
 def update_cheat_code(title: str, cheat: str, tip: str):
     """Function to update cheat code and tip for a game"""
+    global conn
+    global cursor
     conn = sqlite3.connect('cheat_database.db')
     cursor = conn.cursor()
-
     cursor.execute('''
         UPDATE game_cheats
         SET cheat_code = ?, tip = ?
