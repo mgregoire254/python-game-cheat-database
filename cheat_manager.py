@@ -1,3 +1,9 @@
+"""
+A game cheat code manager
+
+Written by Michael Gregoire
+"""
+
 import os
 import sqlite3
 import typer
@@ -75,7 +81,7 @@ def update_cheat_code(title: str, cheat: str, tip: str):
     conn.commit()
     conn.close()
     typer.echo(Fore.GREEN + f"Cheat code and tip updated for {title}.")
-    
+
 def display_cheats_as_table(data):
     """Function to display a table of cheat results"""
     table = PrettyTable()
