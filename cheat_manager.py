@@ -1,8 +1,8 @@
+import os
 import sqlite3
 import typer
 from colorama import Fore, Style, init
-from prettytable import PrettyTable , ALL
-import os
+from prettytable import PrettyTable
 
 # Connect to the database
 conn = sqlite3.connect('cheat_database.db')
@@ -29,8 +29,8 @@ init(autoreset=True)
 # Initialize typer
 app = typer.Typer()
 
-# Function to add a new cheat code and tip to the database
 def add_cheat_code(title: str, cheat_code: str, tip: str):
+    """Function to add a new cheat code and tip to the database"""
     conn = sqlite3.connect('cheat_database.db')
     cursor = conn.cursor()
 
@@ -42,8 +42,8 @@ def add_cheat_code(title: str, cheat_code: str, tip: str):
     conn.commit()
     conn.close()
 
-# Function to search for cheat codes and tips based on the game title
 def search_cheats(title: str):
+    """Function to search for cheat codes and tips based on the game title"""
     conn = sqlite3.connect('cheat_database.db')
     cursor = conn.cursor()
 
@@ -61,8 +61,8 @@ def search_cheats(title: str):
     else:
         typer.echo("No cheat codes or tips found for the given title.")
 
-# Function to update cheat code and tip for a game
 def update_cheat_code(title: str, cheat: str, tip: str):
+    """Function to update cheat code and tip for a game"""
     conn = sqlite3.connect('cheat_database.db')
     cursor = conn.cursor()
 
@@ -75,19 +75,19 @@ def update_cheat_code(title: str, cheat: str, tip: str):
     conn.commit()
     conn.close()
     typer.echo(Fore.GREEN + f"Cheat code and tip updated for {title}.")
-
-# Function to display a table of cheat results    
+    
 def display_cheats_as_table(data):
+    """Function to display a table of cheat results"""
     table = PrettyTable()
     table.field_names = ["Title", "Cheat Code", "Tip"]
 
     for row in data:
         table.add_row(row)
 
-    typer.echo(table)    
+    typer.echo(table)
 
-# Function to create a title and display it
 def display_title():
+    """Function to create a title and display it"""
     title = """
 ++------------------------------------------------------------------------------++
 ++------------------------------------------------------------------------------++
@@ -107,9 +107,8 @@ Written by Michael Gregoire
 
 
 @app.command()
-# Function that creates the main menu
 def menu():
-    # Calls the title function
+    """Function that creates the main menu"""
     display_title()
     # Main menu for cheat code and tips manager.
     while True:
